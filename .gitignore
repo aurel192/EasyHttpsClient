@@ -135,3 +135,8 @@ _NCrunch*
 *.nuspec
 *.nupkg
 
+/.vs/EasyHttpsClient/CopilotIndices
+/.vs/EasyHttpsClient/DesignTimeBuild
+/.vs/EasyHttpsClient/FileContentIndex
+/.vs/EasyHttpsClient/v17
+/.vs/ProjectEvaluation

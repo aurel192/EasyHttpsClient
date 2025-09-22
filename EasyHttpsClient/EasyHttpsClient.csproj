@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyVersion>1.2.1</AssemblyVersion>
+    <FileVersion>1.2.1</FileVersion>
+    <Version>1.2.1</Version>
+    <Title>EasyHttpsClient</Title>
+    <Authors>aurel192</Authors>
+    <Company>aurel192</Company>
+    <Description>Easy Https Client - HTTP(S) GET and POST. Returns string or byte array as result</Description>
+    <Copyright>Copyright © 2024 aurel192 Aurel Kovacs</Copyright>
+    <PackageIcon>logo.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <ItemGroup>
+
+    <PackageReference Include="System.Text.Json" Version="9.0.9" />
+    
+    <None Update="logo.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+
+    <None Update="LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    
+  </ItemGroup>
+
+</Project>
