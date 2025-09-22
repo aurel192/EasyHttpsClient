@@ -2,7 +2,10 @@
 
 ## v1.2.1
 
->EasyHttpsClient is a simple and easy-to-use HTTP client library for .NET. It provides a fluent API for sending HTTP(s) POST and GET requests and retrieving responses.   
+>EasyHttpsClient is a simple and easy-to-use HTTP client library for .NET. It provides a fluent API for sending HTTP POST and GET requests and retrieving responses.   
+
+###### Work In Progress
+>DELETE and PUT methods are yet to be implemented!
 
 ---
 
@@ -26,7 +29,6 @@ Console.WriteLine(response);
 
 ---
 
-
 **To send a POST request, use the POSTasync method:**
 
 ```csharp
@@ -43,7 +45,6 @@ Console.WriteLine(response);
 ```
 
 ---
-
 
 **To send a POST request with a JSON body, use the SetBodyRequestData method**
 
@@ -87,7 +88,6 @@ client.AddToRequestHeaders("Authorization", "Bearer token ...");
 
 **Supports Fluent syntax**
 
-
 ```csharp
 HttpsClient client = new EasyHttpsClient.HttpsClient();
 
@@ -112,13 +112,14 @@ var client = new HttpsClient();
 client.Dispose();
 ```
 
-
 ## License
 
 This library is licensed under the MIT License. See the LICENSE file for details.
 
 ---
+
 ## Contributing
 
-Contributions are welcome. Please submit issues or pull requests on the [GitHub aurel192 - EasyHttpsClient repository](https://github.com/aurel192/EasyHttpsClient)
+Contributions are welcome.  
+Submit issues or pull requests on the [GitHub aurel192 - EasyHttpsClient repository](https://github.com/aurel192/EasyHttpsClient)
 
