@@ -1,4 +1,4 @@
-﻿using EasyHttpsClient;
+﻿using EasyHttpClient;
 using System.Text;
 using System.Text.Json;
 
@@ -53,10 +53,11 @@ namespace ConsoleApp
 
                 byte[] responseByteArray = await getClient.ReadResultAsByteArrayAsync();
                 string responseString = await getClient.ReadResultAsStringAsync();
+
+                HttpResponseMessage httpResponseMessage = getClient.GetHttpResponseMessage();
+
                 responseString = IndentJson(responseString);
-
                 getClient.Dispose();
-
                 return responseString;
             }
             catch (Exception ex)

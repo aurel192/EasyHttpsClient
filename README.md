@@ -1,13 +1,17 @@
 # EasyHttpsClient
 
-## v1.2.1
+## v2.0.0
 
->EasyHttpsClient is a simple and easy-to-use HTTP client library for .NET. It provides a fluent API for sending HTTP POST and GET requests and retrieving responses.   
+>EasyHttpsClient is a simple and easy-to-use HTTP client library for .NET, .NET Core and .NET Framework   
+It provides an easier syntax for sending **GET, POST, PUT, DELETE** requests and retrieving response data.   
 
-###### Work In Progress
->DELETE and PUT methods are yet to be implemented!
+> *Work In Progress:*   
+Different endpoint requires various requests.  
+Feel Free to submit issues or pull requests on [GitHub aurel192 - EasyHttpsClient repository](https://github.com/aurel192/EasyHttpsClient) 
 
 ---
+
+## Links
 
 [GitHub aurel192 - EasyHttpsClient repository](https://github.com/aurel192/EasyHttpsClient)
 
@@ -17,100 +21,113 @@
 
 ## Usage 
 
-**GET Request To send a GET request, use the GETasync method:**
+---
+
+**Setting / Adding  -  Headers, Timeout, Encoding, and more...**
 
 ```csharp
-var client = new HttpsClient();
-client.SetUrl("https://example.com/api/data");
-await client.GETasync();
-var response = await client.ReadResultAsStringAsync();
+client.AddToRequestHeaders("Authorization", "Bearer token / ApiKey / etc ...");
+client.SetTimeout(10);
+client.SetEncoding(Encoding.UTF8);
+```
+
+**GET:**
+
+```csharp
+var getClient = new HttpGetClient();
+getClient.SetUrl($"{BaseUrl}/api/TestItems/");   
+
+// It will just send the request
+await getClient.SendAsync();
+
+// This line will read the result as string
+string responseString = await getClient.ReadResultAsStringAsync();
+
+// or byte array
+byte[] responseByteArray = await getClient.ReadResultAsByteArrayAsync();
+
 Console.WriteLine(response);
+
+// You can access the raw HttpResponseMessage if you need it for some reason
+HttpResponseMessage httpResponseMessage = getClient.GetHttpResponseMessage();
 ```
 
 ---
 
-**To send a POST request, use the POSTasync method:**
+**POST:**
 
 ```csharp
-var client = new HttpsClient();
-client.SetUrl("https://example.com/api/PostHereFormUrlEncodedData/");
-client.SetBodyPostData(new List<KeyValuePair<string, string>>
+var postClient = new HttpPostClient();
+postClient.SetTimeout(10);
+postClient.SetEncoding(Encoding.UTF8);
+
+// POST FormUrlEncodedContent
+postClient.SetUrl("https://www.example.com/api/PostKeyValuePairsHere/");
+postClient.AddBodyPostData("key1", "value1");
+postClient.AddBodyPostData("key2", "value2");
+
+// POST StringContent
+var payloadObject = new
 {
-    new KeyValuePair<string, string>("key1", "value1"),
-    new KeyValuePair<string, string>("key2", "value2")
-});
-await client.POSTasync();
-var response = await client.ReadResultAsStringAsync();
-Console.WriteLine(response);
+    key = "NEW ITEM KEY",
+    value = "NEW NEW",
+    value2 = "BRAND NEW TEST ITEM",
+    boolean = true,
+};   
+
+// Note: it can be any serializable object
+postClient.SetBodyRequestData(payloadObject);   
+
+// Or as Json string
+// Note: it can be any format (e.g. XML, ...) depending on the endpoint
+string payloadJson = @"{""key"": ""NEW ITEM KEY"",""value"": ""NEW NEW"",""value2"": ""BRAND NEW TEST ITEM"",""boolean"": true}";    
+
+postClient.SetBodyRequestJson(payloadJson);
+
+await postClient.SendAsync();
+
+string responseString = await postClient.ReadResultAsStringAsync();
 ```
 
 ---
 
-**To send a POST request with a JSON body, use the SetBodyRequestData method**
+**PUT**
 
 ```csharp
-var client = new HttpsClient();
-client.SetUrl("https://example.com/api/PostHereInPostBody/");
-//example object, it can be any object that can be serialized
-var data = new { key1 = "value1", key2 = "value2", ... }; 
+var putClient = new HttpPutClient();
+putClient.SetUrl($"{BaseUrl}/api/TestItems/1");
 
-client.SetBodyRequestData(data);
-// or use client.SetBodyRequestJson(...);
+var modifiedObject = new
+{
+    key = "THIS IS NOT THE ORIGINAL",
+    value = "IT WILL MODIFY",
+    value2 = "MODIFY THE FIRST ELEMENT",
+    boolean = true,
+};   
 
-await client.POSTasync();
-var response = await client.ReadResultAsStringAsync();
-Console.WriteLine(response);
+putClient.SetBodyRequestData(payloadObject);   
+
+await putClient.SendAsync();   
+
+string responseString = await putClient.ReadResultAsStringAsync();
+
 ```
 
 ---
 
-**Setting Timeout and Encoding
-You can set the timeout and encoding for the HTTP client using the SetTimeout and SetEncoding methods:**
+**DELETE**
 
 ```csharp
-var client = new HttpsClient();
-client.SetTimeout(10); // set timeout to 10 seconds
-client.SetEncoding(Encoding.UTF8); // set encoding to UTF-8
+var deleteClient = new HttpDeleteClient();   
+
+deleteClient.SetUrl($"{BaseUrl}/api/TestItems/15");   
+
+await deleteClient.SendAsync();   
+
+string responseString = await deleteClient.ReadResultAsStringAsync();   
 ```
 
 ---
-
-
-**Adding Headers
-You can add headers to the HTTP request using the AddToRequestHeaders method:**
-
-```csharp
-var client = new HttpsClient();
-client.AddToRequestHeaders("Authorization", "Bearer token ...");
-```
-
----
-
-**Supports Fluent syntax**
-
-```csharp
-HttpsClient client = new EasyHttpsClient.HttpsClient();
-
-await client
-    .SetUrl("https://example.com/etc/GetIt.html")
-    .SetTimeout(15)
-    .SetEncoding(Encoding.UTF8)
-    .GETasync();
-
-byte[] bytearray = await client.ReadResultAsByteArrayAsync();
-string response = await client.ReadResultAsStringAsync();
-```
-
----
-
-Disposing
-Don't forget to dispose the HTTP client when you're done with it to free up memory:
-
-```csharp
-var client = new HttpsClient();
-// ...
-client.Dispose();
-```
 
 ## License
 
@@ -121,5 +138,5 @@ This library is licensed under the MIT License. See the LICENSE file for details
 ## Contributing
 
 Contributions are welcome.  
-Submit issues or pull requests on the [GitHub aurel192 - EasyHttpsClient repository](https://github.com/aurel192/EasyHttpsClient)
+Submit issues or pull requests on [GitHub aurel192 - EasyHttpsClient repository](https://github.com/aurel192/EasyHttpsClient)
 

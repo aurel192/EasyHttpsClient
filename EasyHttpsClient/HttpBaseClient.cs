@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 
-namespace EasyHttpsClient
+namespace EasyHttpClient
 {
     public abstract class HttpBaseClient
     {
@@ -55,20 +55,40 @@ namespace EasyHttpsClient
             this._cancellationToken = cancellationToken;
         }
 
+        public HttpResponseMessage GetHttpResponseMessage()
+        {
+            return this._httpResponseMessage;
+        }
+
         public abstract Task<HttpBaseClient> SendAsync();
 
         public async Task<byte[]> ReadResultAsByteArrayAsync()
         {
-            HttpContent content = _httpResponseMessage.Content;
-            byte[] resultByteArray = await content.ReadAsByteArrayAsync();
-            return resultByteArray;
+            try
+            {
+                HttpContent content = _httpResponseMessage.Content;
+                byte[] resultByteArray = await content.ReadAsByteArrayAsync();
+                return resultByteArray;
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         public async Task<string> ReadResultAsStringAsync()
         {
-            byte[] resultByteArray = await ReadResultAsByteArrayAsync();
-            string resultString = _encoding.GetString(resultByteArray);
-            return resultString;
+            try
+            {
+                HttpContent content = _httpResponseMessage.Content;
+                byte[] resultByteArray = await content.ReadAsByteArrayAsync();
+                string resultString = _encoding.GetString(resultByteArray);
+                return resultString;
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         public void Dispose()

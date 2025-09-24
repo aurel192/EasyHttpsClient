@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Text.Json;
 
-namespace EasyHttpsClient
+namespace EasyHttpClient
 {
     public class HttpPostClient : HttpBaseClient
     {
@@ -85,7 +85,7 @@ namespace EasyHttpsClient
             }
             catch (Exception ex)
             {
-                throw new Exception("POST SendAsync", ex);
+                throw new Exception("Exception in POST SendAsync", ex);
             }
         }
     }

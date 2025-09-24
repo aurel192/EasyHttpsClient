@@ -2,7 +2,7 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace EasyHttpsClient
+namespace EasyHttpClient
 {
     public class HttpDeleteClient : HttpBaseClient
     {
@@ -29,7 +29,7 @@ namespace EasyHttpsClient
             }
             catch (Exception ex)
             {
-                throw new Exception("DELETEasync", ex);
+                throw new Exception("Exception in DELETE SendAsync", ex);
             }
         }
     }

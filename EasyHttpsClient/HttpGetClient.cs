@@ -2,7 +2,7 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace EasyHttpsClient
+namespace EasyHttpClient
 {
     public class HttpGetClient : HttpBaseClient
     {
@@ -29,7 +29,7 @@ namespace EasyHttpsClient
             }
             catch (Exception ex)
             {
-                throw new Exception("GET SendAsync", ex);
+                throw new Exception("Exception in GET SendAsync", ex);
             }
         }
     }
