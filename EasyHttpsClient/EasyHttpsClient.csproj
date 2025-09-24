@@ -2,14 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyVersion>1.2.1</AssemblyVersion>
-    <FileVersion>1.2.1</FileVersion>
-    <Version>1.2.1</Version>
+    <AssemblyVersion>2.0.0</AssemblyVersion>
+    <FileVersion>2.0.0</FileVersion>
+    <Version>2.0.0</Version>
     <Title>EasyHttpsClient</Title>
     <Authors>aurel192</Authors>
     <Company>aurel192</Company>
-    <Description>Easy Https Client - HTTP(S) GET and POST. Returns string or byte array as result</Description>
-    <Copyright>Copyright © 2024 aurel192 Aurel Kovacs</Copyright>
+    <Description>EasyHttpsClient. User friendly easy to use http client based on C# HttpClient class. Makes POST, GET, PUT, DELETE requests easier</Description>
+    <Copyright>Copyright © 2025 Aurel Kovacss</Copyright>
     <PackageIcon>logo.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
